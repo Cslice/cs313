@@ -23,6 +23,17 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+img.baltimorePicture {
+  width: 60%;
+  height: auto;
+}
+
+img.hikingPicture {
+  width: 45%;
+  height: auto;
+}
+
 .nav-justified > li > a {
   padding-top: 15px;
   padding-bottom: 15px;
