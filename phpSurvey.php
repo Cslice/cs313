@@ -1,27 +1,10 @@
 <!DOCTYPE html>
 <?php
-//  if(!isset($_COOKIE['takenSurvey']))
-  //{
-  //  setcookie ("takenSurvey", "true", 9999999999);
-
-  //  session_start();
-    //setcookie("takenSurvey", "true", 9999999999);
-
-    //$_SESSION["takenSurvey"] = "true";
-    //echo "hi";
-  //  echo "Session variables are set." . $_SESSION["id"];
-
-  //}
-  //else
-  //{
-  //  echo "setssion is set";
-  //}
-
-    if (!isset($_COOKIE("")))
+    if (!isset($_COOKIE("takenSurvey")))
     {
-      setcookie("takenSurvey", "true", 9999999999);
+    //  setcookie("takenSurvey", "true", 9999999999);
       session_start();
-      $_SESSION[$countKey] = 1  ;
+      $_SESSION["takenSurvey"] = "true";
     }
     else
     {
