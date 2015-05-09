@@ -1,0 +1,14 @@
+{
+    "gender": {
+        "female": 1
+    },
+    "yearInSchool": {
+        "senior": 1
+    },
+    "favoriteFood": {
+        "american": 1
+    },
+    "favoriteSport": {
+        "basketball": 1
+    }
+}

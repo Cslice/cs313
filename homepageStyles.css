@@ -95,3 +95,8 @@ img.hikingPicture {
     padding-left: 0;
   }
 }
+
+.errorText {
+  font-size: 15px;
+  color: red;
+}
