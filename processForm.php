@@ -10,7 +10,7 @@
   // Update json file with survey results
   $jsonFile = file_get_contents('surveyData.json');
 
-  $surveyData = json_decode($jsonFile, true);
+  $data = json_decode($jsonFile, true);
 
   $data['gender'][$gender] += 1;
   $data['yearInSchool'][$yearInSchool] += 1;
@@ -19,21 +19,5 @@
 
   file_put_contents('surveyData.json', json_encode($data, JSON_PRETTY_PRINT));
 
-  // Keep track of user who have taken survey
-  $jsonFile = file_get_contents('sessionUserData.json');
-
-  $surveyUserData = json_decode($jsonFile, true);
-
-  //$data['gender'][$gender] += 1;
-
-  echo $_SESSION["id"];
-
-
-
-
-  file_put_contents('sessionUserData.json', json_encode($surveyUserData, JSON_PRETTY_PRINT));
-
-
-  session_id();
-
+  echo "<script type='text/javascript'>window.location.assign('results.php')</script>";
 ?>

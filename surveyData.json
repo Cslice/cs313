@@ -1,14 +1,24 @@
 {
     "gender": {
-        "female": 1
+        "male": 2,
+        "female": 8
     },
     "yearInSchool": {
+        "junior": 2,
+        "freshman": 4,
+        "sophomore": 3,
         "senior": 1
     },
     "favoriteFood": {
-        "american": 1
+        "american": 7,
+        "mexican": 1,
+        "chinese": 1,
+        "italian": 1
     },
     "favoriteSport": {
-        "basketball": 1
+        "basketball": 7,
+        "football": 1,
+        "hockey": 1,
+        "baseball": 1
     }
 }
