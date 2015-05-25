@@ -58,7 +58,7 @@ foreach($users as $row)
 
     <div class="container">
 
-      <form class="form-signin" onsubmit="return validate()" action="menu.php">
+      <form class="form-signin" action="menu.php">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Username</label>
         <input type="text" id="username" class="form-control" placeholder="User ID" required autofocus>
