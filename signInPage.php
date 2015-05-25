@@ -1,3 +1,20 @@
+<?php
+
+$server = '127.0.0.1';
+$database = 'nba_predictor_app';
+$username = 'root';
+$password = 'root';
+$userID = 1;
+
+$db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
+$users = $db->query('Select username from user;');
+
+foreach($users as $row)
+{
+  echo $row[username] . "<br />";
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +45,20 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+      <script type = "text/javaScript"> 
+      function validate()
+        {
+          return true;
+
+        }
+      </script>
   </head>
 
   <body>
 
     <div class="container">
 
-      <form class="form-signin" action="menu.php">
+      <form class="form-signin" onsubmit="return validate()" action="menu.php">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Username</label>
         <input type="text" id="username" class="form-control" placeholder="User ID" required autofocus>
@@ -47,7 +71,7 @@
         <b />
 
           <a href="createAccountForm.php">Create An Account<a>
-      </form>
+      </form onsubmit="return validate()">
 
     </div> <!-- /container -->
 

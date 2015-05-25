@@ -21,25 +21,26 @@ INSERT INTO Team
 (
 name                                    ,
 number_of_games_played                  , 
+seed   									,
 eliminated
 )
 VALUES 
-('Atlanta Hawks', 1, false)             ,
-('Boston Celtics', 1, true)             ,
-('Brooklyn Nets', 1, true)              ,
-('Chicago Bulls', 1, true)              ,
-('Cleveland Cavaliers', 1, false)       ,
-('Dallas Mavericks', 1, true)           ,
-('Golden State Warriors', 1, false)     ,
-('Houston Rockets', 1, false)           ,
-('Los Angeles Clippers', 1, true)       ,
-('Memphis Grizzlies', 1, true)          ,
-('Milwaukee Bucks', 1, true)            ,
-('New Orleans Pelicans', 1, true)       ,
-('Portland Trailblazers', 1, true)      ,
-('San Antonio Spurs', 1, true)          ,
-('Toronto Raptors', 1, true)            ,
-('Washington Wizards', 1, true
+('Atlanta Hawks', 1, 1, false)             ,
+('Boston Celtics', 7, 1, true)             ,
+('Brooklyn Nets', 8, 1, true)              ,
+('Chicago Bulls', 3, 1, true)              ,
+('Cleveland Cavaliers', 3, 1, false)       ,
+('Dallas Mavericks', 7, 1, true)           ,
+('Golden State Warriors', 1, 1, false)     ,
+('Houston Rockets', 2, 1, false)           ,
+('Los Angeles Clippers', 3, 1, true)       ,
+('Memphis Grizzlies', 5, 1, true)          ,
+('Milwaukee Bucks', 6, 1, true)            ,
+('New Orleans Pelicans', 8, 1, true)       ,
+('Portland Trailblazers', 4, 1, true)      ,
+('San Antonio Spurs', 6, 1, true)          ,
+('Toronto Raptors', 4, 1, true)            ,
+('Washington Wizards', 5, 1, true
 );
 
 -- Insert Users 
@@ -50,9 +51,7 @@ first_name                              ,
 username                                , 
 password                                , 
 group_id                                ,
-number_of_points                        ,
-user_image_url                          , 
-favorite_team_in_playoffs_id            , 
+number_of_points                        , 
 admin
 )								  
 VALUES
@@ -63,8 +62,6 @@ VALUES
 'password'								, 
 1										, 
 1										, 
-'image_url'								, 
-6										, 
 1
 ),
 (
@@ -72,9 +69,7 @@ VALUES
 'Denton'						   		, 
 'rdenton'								, 
 'password'								, 
-1										, 
-1										, 
-'image_url'								, 
+2										, 
 1										, 
 0
 ),
@@ -83,12 +78,119 @@ VALUES
 'Nelson'						   		, 
 'mnelson'								, 
 'password'								, 
+2										, 
 1										, 
-1										, 
-'image_url'								, 
-7										, 
 0
 );
+
+-- Insert Rounds
+
+-- First Round 
+INSERT INTO playoff_bracket
+(
+conference,
+round_number,
+team_1,
+team_2,
+team_3,
+team_4,
+team_5,
+team_6,
+team_7,
+team_8
+)
+VALUES
+(
+"West",
+1,
+7,
+12,
+13,
+10,
+9,
+14,
+8,
+6
+),
+(
+"Eeat",
+1,
+1,
+3,
+15,
+16,
+4,
+11,
+5,
+2
+);
+
+-- Second Round
+INSERT INTO playoff_bracket
+(
+conference,
+round_number,
+team_1,
+team_2,
+team_3,
+team_4
+)
+VALUES
+(
+"West",
+2,
+7,
+10,
+9,
+8
+),
+(
+"Eest",
+2,
+1,
+16,
+4,
+5
+);
+
+-- Conference Final - Third Round
+INSERT INTO playoff_bracket
+(
+conference,
+round_number,
+team_1,
+team_2
+)
+VALUES
+(
+"West",
+3,
+7,
+8
+),
+(
+"Eeat",
+3,
+1,
+5
+);
+
+-- NBA Finals - Forth Round
+INSERT INTO playoff_bracket
+(
+conference,
+round_number,
+team_1,
+team_2
+)
+VALUES
+(
+"Both",
+4,
+7,
+5
+);
+
 
 -- Insert Games
 
@@ -96,20 +198,33 @@ INSERT INTO game
 (
 team1_id,
 team2_id,
-favored_team,
 game_date,
 game_in_series,
-round_number
+round_number,
+round_id,
+winner
 )
 VALUES
 (
 3 ,
 4 ,
-3 ,
 '22-05-2015' ,
 1 ,
+3,
+2,
 3
+),
+(
+6 ,
+8 ,
+'22-05-2015' ,
+1 ,
+3,
+2,
+8
 );
+
+
 
 -- Insert User Predictions
 
@@ -117,15 +232,22 @@ INSERT INTO user_prediction
 (
 user_id,
 game_id,
-prediction,
-result
+prediction, 
+points_recieved_for_game
 )
 VALUES
 (
 1,
 1,
 2,
-3
+1
+),
+(
+1,
+2,
+9,
+1
 );
+
 
 

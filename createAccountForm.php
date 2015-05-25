@@ -45,19 +45,19 @@ $groups = $db->query('select * from user_group');
     <div class="container">
         <h2 class="form-signin-heading">Please fill in the following information</h2>
 
-      <form class="form-signin" action="menu.php">
-        <input type="text" id="firstName" class="form-control" placeholder="First Name" required autofocus>
+      <form class="form-signin" method='POST' action="menu.php">
+        <input type="text" name="firstName" class="form-control" placeholder="First Name" required autofocus>
         <br />
 
-        <input type="text" id="lastName" class="form-control" placeholder="Last Name" required autofocus> 
+        <input type="text" name="lastName" class="form-control" placeholder="Last Name" required autofocus> 
         <br />
 
-        <input type="text" id="username" class="form-control" placeholder="User ID" required autofocus>
+        <input type="text" name="username" class="form-control" placeholder="User ID" required autofocus>
         <br />
         
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
 
-        <input type="text" id="groupID" class="form-control" placeholder="User ID" required autofocus>
+        <input type="text" name="groupID" class="form-control" placeholder="User ID" required autofocus>
         <br/> 
         <select>
           <?php

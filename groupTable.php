@@ -4,16 +4,15 @@ $server = '127.0.0.1';
 $database = 'nba_predictor_app';
 $username = 'root';
 $password = 'root';
+$groupID = 2;
 
 $db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
 
-$group = $db->query('SELECT u.id, u.first_name, u.last_name, u.number_of_points,
-                     u.user_image_url, t.name as \'team_name\'
+$group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points
                      FROM user_group g 
                      INNER JOIN user u 
                      ON g.id = u.group_id
-                     INNER JOIN team t 
-                     ON t.id = u.favorite_team_in_playoffs_id;');
+                     WHERE u.group_id = $groupID;");
 ?>
 
 <!DOCTYPE html>
@@ -70,24 +69,22 @@ $group = $db->query('SELECT u.id, u.first_name, u.last_name, u.number_of_points,
                 <th>ID</th>
                 <th>Name</th>
                 <th>Number of Points</th>
-                <th>Favorite Team in Playoffs</th>
-                <th>Picture</th>
               </tr>
             </thead>
             <tbody>
               
-                  <?php  
+                  <?php 
+                  $count = 1; 
                     foreach ($group as $row)
                     {
                     //  $nbaTeamName = $db->query('SELECT name FROM team t INNER JOIN user u ON t.id = u.favorite_team_in_playoffs_id where t.id = 9;');
                 
                      echo "<tr>
-                              <td>$row[id]</td>
+                              <td>$count</td>
                               <td>$row[last_name] $row[first_name]</td>
-                              <td>$row[number_of_points]</td>
-                              <td>$row[team_name]</td>                   
-                              <td>$row[user_image_url]</td>
+                              <td>$row[number_of_points]</td>                  
                            </tr>";
+                           $count++;
                     }
                   ?>                  
             </tbody>

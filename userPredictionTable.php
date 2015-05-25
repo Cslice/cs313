@@ -4,18 +4,25 @@ $server = '127.0.0.1';
 $database = 'nba_predictor_app';
 $username = 'root';
 $password = 'root';
+$userID = 1;
 
 $db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
+$teams = $db->query('Select name from team;');
+$teamsArray = array();
 
-$group = $db->query('SELECT u.id, u.user_id, u.game_id, u.prediction, 
-       u.points_recieved_for_game, g.team1_id, g.team2_id,
-       g.game_in_series, g.winner, g.favored_team 
+foreach($teams as $row)
+{
+  array_push($teamsArray, $row[name]); 
 
+}
+
+$group = $db->query("SELECT u.user_id, u.prediction, 
+       u.points_recieved_for_game, g.team1_id, g.team2_id, g.winner
                      FROM game g 
                      INNER JOIN user_prediction u
                      ON g.id = u.game_id 
                      INNER JOIN team as t
-                     ON t.id = g.team1_id;');
+                     ON t.id = g.team1_id where u.user_id = $userID");
                      
 ?>
 
@@ -74,27 +81,31 @@ $group = $db->query('SELECT u.id, u.user_id, u.game_id, u.prediction,
                 <th>Team #1</th>
                 <th>Team #2</th>
                 <th>Points Recieved For Game</th>
-                <th>Result</th>
-                <th>Favored Team</th>
-                <th>Favored Team</th>
+                <th>Winner</th>
               </tr>
             </thead>
             <tbody>
               
-                  <?php  
+                  <?php
+                  $count = 1;  
                     foreach ($group as $row)
                     {
+                      $team1 = $teamsArray[$row[team1_id]];
+                      $team2 = $teamsArray[$row[team2_id]];
+                      $winner = $teamsArray[$row[winner]];
+
+                
+
                     //  $nbaTeamName = $db->query('SELECT name FROM team t INNER JOIN user u ON t.id = u.favorite_team_in_playoffs_id where t.id = 9;');
                 
                      echo "<tr>
-                              <td>$row[id]</td>
-                              <td>$row[team1_id]</td>
-                              <td>$row[team2_id]</td>
+                              <td>$count</td>
+                              <td>$team1</td>
+                              <td>$team2</td>
                               <td>$row[points_recieved_for_game]</td>           
-                              <td>$row[result]</td>
-                              <td>$row[favored_team]</td>
-                              <td>$row[winner]</td>
+                              <td>$winner</td>
                            </tr>";
+                          $count++;
                     }
                   ?>                  
             </tbody>

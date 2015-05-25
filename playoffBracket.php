@@ -1,4 +1,27 @@
+<?php
 
+$server = '127.0.0.1';
+$database = 'nba_predictor_app';
+$username = 'root';
+$password = 'root';
+
+$db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
+
+$rounds = $db->query('Select * from playoff_bracket');
+$teams = $db->query('Select name from team;');
+$roundsArray = array();
+$teamsArray = array();
+foreach($rounds as $row)
+{
+  array_push($roundsArray, $row); 
+}
+
+foreach($teams as $row)
+{
+  array_push($teamsArray, $row[name]); 
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,50 +94,50 @@ td p {
 
       <table summary="Tournament Bracket">
        <tr>
-        <td><p>1. team name</p></td>
-        <td rowspan="2"><p>13. team name</p></td>
-        <td rowspan="4"><p>14. team name</p></td>
-        <td rowspan="8"><p>14. team name</p></td>
-        <td rowspan="8"><p>14. team name</p></td>
-        <td rowspan="4"><p>14. team name</p></td>
-        <td rowspan="2"><p>14. team name</p></td>
-        <td><p>1. team name</p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[0][team_1]-1]?></p></td>
+        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[2][team_1]-1]?></p></td>
+        <td rowspan="4"><p><?php echo $teamsArray[$roundsArray[4][team_1]-1]?></p></td>
+        <td rowspan="8"><p><?php echo $teamsArray[$roundsArray[6][team_1]-1]?></p></td>
+        <td rowspan="8"><p><?php echo $teamsArray[$roundsArray[6][team_2]-1]?></p></td>
+        <td rowspan="4"><p><?php echo $teamsArray[$roundsArray[5][team_1]-1]?></p></td>
+        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[3][team_1]-1]?></p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[1][team_1]-1]?></p></td>
        </tr>
        <tr>
-        <td><p>8. team name</p></td>
-        <td><p>8. team name</p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[0][team_2]-1]?></p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[1][team_2]-1]?></p></td>
        </tr>
        <tr>
-        <td><p>4. team name</p></td>
-        <td rowspan="2"><p>12. team name</p></td>    
-        <td rowspan="2"><p>12. team name</p></td>
-        <td><p>4. team name</p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[0][team_3]-1]?></p></td>
+        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[2][team_2]-1]?></p></td>    
+        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[3][team_2]-1]?></p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[1][team_3]-1]?></p></td>
        </tr>
        <tr>
-        <td><p>5. team name</p></td>
-        <td><p>5. team name</p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[0][team_4]-1]?></p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[1][team_4]-1]?></p></td>
        </tr>
        <tr>
-        <td><p>3. team name</p></td>
-        <td rowspan="2"><p>1. team name</p></td>
-        <td rowspan="4"><p>14. team name</p></td>
-        <td rowspan="4"><p>14. team name</p></td>
-        <td rowspan="2"><p>1. team name</p></td>
-        <td><p>3. team name</p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[0][team_5]-1]?></p></td>
+        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[2][team_3]-1]?></p></td>
+        <td rowspan="4"><p><?php echo $teamsArray[$roundsArray[4][team_2]-1]?></p></td>
+        <td rowspan="4"><p><?php echo $teamsArray[$roundsArray[5][team_2]-1]?></p></td>
+        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[3][team_3]-1]?></p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[1][team_5]-1]?></p></td>
        </tr>
        <tr>
-        <td><p>6. team name</p></td>
-        <td><p>6. team name</p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[0][team_6]-1]?></p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[1][team_6]-1]?></p></td>
        </tr>
        <tr>
-        <td><p>2. team name</p></td>
-        <td rowspan="2"><p>1. team name</p></td>
-        <td rowspan="2"><p>1. team name</p></td>
-        <td><p>2. team name</p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[0][team_7]-1]?></p></td>
+        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[2][team_4]-1]?></p></td>
+        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[3][team_4]-1]?></p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[1][team_7]-1]?></p></td>
        </tr>
        <tr>
-        <td><p>7. team name</p></td>
-        <td><p>7. team name</p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[0][team_8]-1]?></p></td>
+        <td><p><?php echo $teamsArray[$roundsArray[1][team_8]-1]?></p></td>
        </tr>
       </table>
 
