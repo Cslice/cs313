@@ -1,11 +1,9 @@
 <?php
 
-$server = '127.0.0.1';
-$database = 'nba_predictor_app';
-$username = 'root';
-$password = 'root';
+require("connectToDatabase.php");
 
-$db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
+  $db = loadDatabase();
+
 $groups = $db->query('select * from user_group');
 ?>
 

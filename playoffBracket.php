@@ -1,11 +1,10 @@
 <?php
 
-$server = '127.0.0.1';
-$database = 'nba_predictor_app';
-$username = 'root';
-$password = 'root';
 
-$db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
+require("connectToDatabase.php");
+
+  $db = loadDatabase();
+
 
 $rounds = $db->query('Select * from playoff_bracket');
 $teams = $db->query('Select name from team;');

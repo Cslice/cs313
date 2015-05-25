@@ -1,11 +1,10 @@
 <?php
 
-	$server = '127.0.0.1';
-	$database = 'nba_predictor_app';
-	$username = 'root';
-	$password = 'root';
+require("connectToDatabase.php");
 
-	$db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
+  $db = loadDatabase();
+  
+
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
     	$firstName = $_POST["firstName"];
