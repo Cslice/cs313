@@ -1,12 +1,21 @@
 <?php
-
+/*
 $server = '127.0.0.1';
 $database = 'nba_predictor_app';
 $username = 'root';
-$password = 'root';
+$password = 'root';*/
 $userID = 1;
 
-$db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
+define('DB_HOST', getenv('127.10.156.130:27743'));
+define('DB_PORT',getenv('443')); 
+define('DB_USER',getenv('adminyKijvBw'));
+define('DB_PASS',getenv('UTHRMZExtfJi'));
+$dbname = "nba_predictor_app";
+
+$dsn = 'mysql:dbname='.$dbname.';host='.DB_HOST.';port='.DB_PORT;
+$db = new PDO($dsn, DB_USER, DB_PASS);
+
+//$db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
 $users = $db->query('Select username from user;');
 
 foreach($users as $row)
