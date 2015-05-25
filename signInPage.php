@@ -6,14 +6,17 @@ $username = 'root';
 $password = 'root';*/
 $userID = 1;
 
-define('DB_HOST', getenv('127.10.1'));
-define('DB_PORT',getenv('8080')); 
-define('DB_USER',getenv('adminyKijvBw'));
-define('DB_PASS',getenv('UTHRMZExtfJi'));
+$dbHost = getenv('OPENSHIFT_MYSQL_DB_HOST');
+$dbPort = getenv('OPENSHIFT_MYSQL_DB_PORT');
+$dbUser = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
+$dbPassword = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
 $dbname = "nba_predictor_app";
 
-$dsn = 'mysql:dbname='.$dbname.';host='.DB_HOST.';port='.DB_PORT;
-$db = new PDO($dsn, DB_USER, DB_PASS);
+//$dsn = 'mysql:dbname='.$dbname.';host='.DB_HOST.';port='.DB_PORT;
+
+$db = new PDO("mysql:host=$dbHost:$dbPort;dbname=$dbName", $dbUser, $dbPassword);
+
+//$db = new PDO($dsn, DB_USER, DB_PASS);
 
 //$db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
 $users = $db->query('Select username from user;');
