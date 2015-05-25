@@ -7,7 +7,7 @@ $password = 'root';*/
 $userID = 1;
 
 define('DB_HOST', getenv('127.10.156.130:27743'));
-define('DB_PORT',getenv('443')); 
+define('DB_PORT',getenv('80')); 
 define('DB_USER',getenv('adminyKijvBw'));
 define('DB_PASS',getenv('UTHRMZExtfJi'));
 $dbname = "nba_predictor_app";
