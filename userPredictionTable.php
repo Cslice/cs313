@@ -1,5 +1,7 @@
 <?php
 
+$userID = 1;
+
 require("connectToDatabase.php");
 
   $db = loadDatabase();

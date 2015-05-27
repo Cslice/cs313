@@ -1,6 +1,7 @@
 
+
 -- Insert Groups
-INSERT INTO User_group 
+INSERT INTO user_group 
 (
 group_name                              , 
 number_of_users
@@ -17,7 +18,7 @@ VALUES
 
 
 -- Insert NBA Teams
-INSERT INTO Team 
+INSERT INTO team 
 (
 name                                    ,
 number_of_games_played                  , 
@@ -44,7 +45,7 @@ VALUES
 );
 
 -- Insert Users 
-INSERT INTO User 
+INSERT INTO user 
 (
 last_name                               ,  
 first_name                              ,

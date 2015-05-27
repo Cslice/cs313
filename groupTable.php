@@ -1,5 +1,6 @@
 <?php
 
+$group = 1;
 require("connectToDatabase.php");
 
   $db = loadDatabase();

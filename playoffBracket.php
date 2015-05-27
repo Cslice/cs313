@@ -3,7 +3,7 @@
 
 require("connectToDatabase.php");
 
-  $db = loadDatabase();
+$db = loadDatabase();
 
 
 $rounds = $db->query('Select * from playoff_bracket');
