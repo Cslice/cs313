@@ -1,7 +1,8 @@
 <?php
 
-  $userID = 1;
   require("connectToDatabase.php");
+
+  $userID = 1;
 
   $db = loadDatabase();
   $groupID = 2;

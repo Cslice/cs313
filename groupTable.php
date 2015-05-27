@@ -4,13 +4,13 @@ require("connectToDatabase.php");
 
 $groupID = 1;
 
-  $db = loadDatabase();
+$db = loadDatabase();
 
 $group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points
                      FROM user_group g 
                      INNER JOIN user u 
                      ON g.id = u.group_id
-                     WHERE u.group_id = $groupID;");
+                     WHERE u.group_id = 1;");
 ?>
 
 <!DOCTYPE html>

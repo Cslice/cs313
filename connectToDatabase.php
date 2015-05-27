@@ -19,12 +19,11 @@ function loadDatabase()
           $username = 'root';
           $password = 'root';
 
-          $db = new PDO("mysql: host=$server; dbname=$database", $username, $password);
+          $db = new PDO("mysql:host=$server; dbname=$database", $username, $password);
 
      }
      else
      {
-          echo("Connecting to openshift");
           // In the openshift environment
           $dbHost = getenv('OPENSHIFT_MYSQL_DB_HOST');
           $dbPort = getenv('OPENSHIFT_MYSQL_DB_PORT');
