@@ -1,8 +1,10 @@
 <?php
 
-$userID = 1;
+
 
 require("connectToDatabase.php");
+
+$userID = 1;
 
   $db = loadDatabase();
 
@@ -21,7 +23,7 @@ $group = $db->query("SELECT u.user_id, u.prediction,
                      INNER JOIN user_prediction u
                      ON g.id = u.game_id 
                      INNER JOIN team as t
-                     ON t.id = g.team1_id where u.user_id = $userID");
+                     ON t.id = g.team1_id where u.user_id = $userID;");
                      
 ?>
 
