@@ -1,6 +1,6 @@
 <?php
 
-$group = 1;
+$groupID = 1;
 require("connectToDatabase.php");
 
   $db = loadDatabase();
