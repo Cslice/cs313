@@ -1,19 +1,8 @@
 <?php
 
   require("connectToDatabase.php");
-
-  $userID = 1;
-
   $db = loadDatabase();
-  $groupID = 2;
 
-  $users = $db->query('Select username from user;');
-
-/*foreach($users as $row)
-{
-  echo $row[username] . "<br />";
-}
-*/
 ?>
 
 <!DOCTYPE html>

@@ -20,7 +20,7 @@ foreach($teams as $row)
   array_push($teamsArray, $row[name]); 
 
 }
-echo $
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
