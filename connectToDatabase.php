@@ -5,7 +5,7 @@ function loadDatabase()
      $dbPort = "";
      $dbUser = "";
      $dbPassword = "";
-     $dbname = "nba_predictor_app";
+     $dbName = "nba_predictor_app";
 
      $openShiftVar = getenv('OPENSHIFT_MYSQL_DB_HOST');
 
