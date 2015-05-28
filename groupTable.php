@@ -12,13 +12,6 @@ $group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points
                      ON g.id = u.group_id
                      WHERE u.group_id = 1;");
                      
-
-$test = $db ->query("select name from team;");
-
-foreach ($test as $row)
-{
-  echo $row[name];
-}
 ?>
 
 <!DOCTYPE html>
