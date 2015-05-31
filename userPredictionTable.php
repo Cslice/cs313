@@ -1,30 +1,39 @@
 <?php
+    require("connectToDatabase.php");
+    
+    // Check for session cookie and extracts user data out of cookie
+    require("verifySession.php");
 
+    $db = loadDatabase();
 
+    $teams = $db->query('Select name from team;');
+    $teamsArray = array();
 
-require("connectToDatabase.php");
+    foreach($teams as $row)
+    {
+      array_push($teamsArray, $row[name]); 
 
-$userID = 1;
+    }
 
-  $db = loadDatabase();
+    $games = $db->query("Select g.id, g.team1_id, g.team2_id, g.game_date, g.winner, 
+      g.round_number, g.round_id
+                         FROM game g
+                         INNER JOIN team as t
+                         ON t.id = g.team1_id");
 
-$teams = $db->query('Select name from team;');
-$teamsArray = array();
+    $prediction_list = $db->query("Select game_id, prediction, points_recieved_for_game
+                                   from user_prediction 
+                                   WHERE user_id = $user_id");
 
-foreach($teams as $row)
-{
-  array_push($teamsArray, $row[name]); 
+    $prediction_array = array();
+    $points_for_game_array = array();
 
-}
+    foreach ($prediction_list as $row)
+    {
+      $prediction_array[$row[game_id]] = $row[prediction];
+      $points_for_game_array[$row[game_id]] = $row[points_recieved_for_game];
 
-$group = $db->query("SELECT u.user_id, u.prediction, 
-       u.points_recieved_for_game, g.team1_id, g.team2_id, g.winner
-                     FROM game g 
-                     INNER JOIN user_prediction u
-                     ON g.id = u.game_id 
-                     INNER JOIN team as t
-                     ON t.id = g.team1_id where u.user_id = $userID;");
-                     
+    }             
 ?>
 
 <!DOCTYPE html>
@@ -81,31 +90,61 @@ $group = $db->query("SELECT u.user_id, u.prediction,
                 <th>ID</th>
                 <th>Team #1</th>
                 <th>Team #2</th>
-                <th>Points Recieved For Game</th>
+                <th>Date</th>
                 <th>Winner</th>
+                <th>Prediction</th>
+                <th>Points Recieved For Game</th>
               </tr>
             </thead>
             <tbody>
-              
-                  <?php
+                  <?php         
                   $count = 1;  
-                    foreach ($group as $row)
+
+                    foreach ($games as $row)
                     {
-                      $team1 = $teamsArray[$row[team1_id]];
-                      $team2 = $teamsArray[$row[team2_id]];
-                      $winner = $teamsArray[$row[winner]];
+                      $game_id = $row[id];
+                      $team_1 = $teamsArray[$row[team1_id]-1];
+                      $team_1_id = $row[team1_id];
+                      $team_2 = $teamsArray[$row[team2_id]-1];
+                      $team_2_id = $row[team2_id];
+                      $game_date = $row[game_date];
+                      $winner = $teamsArray[$row[winner]-1];
 
-                
+                      if(isset($prediction_array[$game_id]))
+                      {
+                        $prediction = $teamsArray[$prediction_array[$game_id]];
+                      }
+                      else
+                      {
+                        $prediction = NULL;
+                      }
+                      
+                      
+                      $points_recieved_for_game = $points_for_game_array[$game_id]; 
+                    
+      
 
-                    //  $nbaTeamName = $db->query('SELECT name FROM team t INNER JOIN user u ON t.id = u.favorite_team_in_playoffs_id where t.id = 9;');
-                
-                     echo "<tr>
+                      echo "<tr>
                               <td>$count</td>
-                              <td>$team1</td>
-                              <td>$team2</td>
-                              <td>$row[points_recieved_for_game]</td>           
-                              <td>$winner</td>
-                           </tr>";
+                              <td>$team_1</td>
+                              <td>$team_2</td>
+                              <td>$game_date</td>           
+                              <td>$winner</td>";
+
+                              if($prediction == NULL)
+                              {
+                                echo  "<td><select name='$game_id'>
+                                       <option value='$team_1_id'>
+                                       $team_1</option>
+                                       <option value='$team_2_id'>
+                                       $team_2</option></select></td>";
+                              }
+                              else
+                              {
+                                echo "<td>$prediction</td>";
+                              }                        
+                               echo "<td>$points_recieved_for_game</td>
+                                     </tr>";
                           $count++;
                     }
                   ?>                  

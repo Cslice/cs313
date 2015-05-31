@@ -1,3 +1,18 @@
+<?php 
+    require("connectToDatabase.php");
+    // Check for session cookie and extracts user data out of cookie
+    require("verifySession.php");
+
+    $db = loadDatabase();
+
+    $first_name_list = $db->query("Select first_name from user 
+                                   WHERE id = $user_id");
+
+    foreach($first_name_list as $row)
+    {
+      $first_name = $row[first_name];
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,6 +52,8 @@
       
 
       <div class="page-header">
+        <h1><?php echo $first_name?></h1>
+        <br />
         <h1>NBA Playoffs</h1>
       </div>
     
@@ -48,6 +65,7 @@
       <a href="userPredictionTable.php"><button type="button" class="btn btn-lg btn-info">View Your Predictions</button></a>
       <a href="playoffBracket.php"><button type="button" class="btn btn-lg btn-warning">View Playoff Bracket</button></a>
       <a href="groupTable.php"><button type="button" class="btn btn-lg btn-danger">View People In Your Group</button></a>
+      <a href="endSession.php"><button type="button" class="btn btn-lg btn-danger">Sign Out</button></a>
     </div>
 
    

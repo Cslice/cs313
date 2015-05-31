@@ -47,8 +47,8 @@ VALUES
 -- Insert Users 
 INSERT INTO user 
 (
-last_name                               ,  
-first_name                              ,
+first_name                               ,  
+last_name                              ,
 username                                , 
 password                                , 
 group_id                                ,
@@ -59,9 +59,9 @@ VALUES
 (
 'Cameron'								,
 'Thomas'								, 
-'cctski'								, 
-'password'								, 
-1										, 
+'a'								, 
+'a'								, 
+2										, 
 1										, 
 1
 ),
@@ -209,7 +209,7 @@ VALUES
 (
 3 ,
 4 ,
-'22-05-2015' ,
+'2015-2-05' ,
 1 ,
 3,
 2,
@@ -218,7 +218,25 @@ VALUES
 (
 6 ,
 8 ,
-'22-05-2015' ,
+'2015-2-05' ,
+1 ,
+3,
+2,
+8
+),
+(
+6 ,
+8 ,
+'2015-2-05' ,
+1 ,
+3,
+2,
+8
+),
+(
+6 ,
+8 ,
+'2015-2-05' ,
 1 ,
 3,
 2,
@@ -241,14 +259,50 @@ VALUES
 1,
 1,
 2,
-1
+0
 ),
 (
 1,
 2,
 9,
+0
+),
+(
+2,
+1,
+4,
+0
+),
+(
+1,
+3,
+4,
+0
+);
+/*
+
+INSERT INTO user_prediction
+(
+user_id,
+game_id,
+points_recieved_for_game
+)
+VALUES
+(
+1,
+1,
+1
+),
+(
+1,
+2,
+1
+),
+(
+2,
+2,
 1
 );
-
+*/
 
 

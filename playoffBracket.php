@@ -1,26 +1,22 @@
 <?php
+  require("connectToDatabase.php");
+
+  $db = loadDatabase();
 
 
-require("connectToDatabase.php");
+  $rounds = $db->query('Select * from playoff_bracket');
+  $teams = $db->query('Select name from team;');
+  $roundsArray = array();
+  $teamsArray = array();
+  foreach($rounds as $row)
+  {
+    array_push($roundsArray, $row); 
+  }
 
-$db = loadDatabase();
-
-
-$rounds = $db->query('Select * from playoff_bracket');
-$teams = $db->query('Select name from team;');
-$roundsArray = array();
-$teamsArray = array();
-foreach($rounds as $row)
-{
-  array_push($roundsArray, $row); 
-}
-
-foreach($teams as $row)
-{
-  array_push($teamsArray, $row[name]); 
-
-}
-
+  foreach($teams as $row)
+  {
+    array_push($teamsArray, $row[name]); 
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

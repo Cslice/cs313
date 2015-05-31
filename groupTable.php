@@ -1,17 +1,16 @@
 <?php
+    require("connectToDatabase.php");
 
-require("connectToDatabase.php");
+    // Check for session cookie and extracts user data out of cookie
+    require("verifySession.php");
 
-$groupID = 1;
+    $db = loadDatabase();
 
-$db = loadDatabase();
-
-$group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points
+    $group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points
                      FROM user_group g 
                      INNER JOIN user u 
                      ON g.id = u.group_id
-                     WHERE u.group_id = 1;");
-                     
+                     WHERE u.group_id = $group_id;");                     
 ?>
 
 <!DOCTYPE html>

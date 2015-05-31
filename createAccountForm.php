@@ -1,10 +1,7 @@
 <?php
-
-require("connectToDatabase.php");
-
-  $db = loadDatabase();
-
-$groups = $db->query('select * from user_group');
+    require("connectToDatabase.php");
+    $db = loadDatabase();
+    $groups = $db->query('select * from user_group');
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +40,7 @@ $groups = $db->query('select * from user_group');
     <div class="container">
         <h2 class="form-signin-heading">Please fill in the following information</h2>
 
-      <form class="form-signin" method='POST' action="menu.php">
+      <form class="form-signin" name="form" method='POST' action="createAccount.php">
         <input type="text" name="firstName" class="form-control" placeholder="First Name" required autofocus>
         <br />
 
@@ -55,9 +52,12 @@ $groups = $db->query('select * from user_group');
         
         <input type="password" name="password" class="form-control" placeholder="Password" required>
 
-        <input type="text" name="groupID" class="form-control" placeholder="User ID" required autofocus>
+        
         <br/> 
-        <select>
+        <br/> 
+
+        <h5>Select a Group</h5> 
+        <select name="group_name_dropdown">
           <?php
             foreach($groups as $row) 
             {
@@ -66,7 +66,16 @@ $groups = $db->query('select * from user_group');
           ?>
         </select>
 
-        <br /> 
+        <br/> 
+        <h5>Or</h5>
+        <br/> 
+
+        <h5>Create a New Group</h5>
+        <br/>
+
+        <input type="text" name="group_name_textbox" class="form-control" placeholder="Group Name" autofocus>
+
+        <br/> 
         <br/> 
 
 
