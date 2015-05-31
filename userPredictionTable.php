@@ -2,7 +2,7 @@
     require("connectToDatabase.php");
     
     // Check for session cookie and extracts user data out of cookie
-    require("verifySession.php");
+    require("verifySession.php"); 
 
     $db = loadDatabase();
 
