@@ -1,10 +1,11 @@
 <?php
     require("connectToDatabase.php");
-
+    $db = loadDatabase();
     // Check for session cookie and extracts user data out of cookie
     require("verifySession.php");
+    require("awardPoints.php");
 
-    $db = loadDatabase();
+
 
     $group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points
                      FROM user_group g 

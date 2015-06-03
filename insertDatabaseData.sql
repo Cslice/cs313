@@ -62,7 +62,7 @@ VALUES
 'a'								, 
 'a'								, 
 2										, 
-1										, 
+0										, 
 1
 ),
 (
@@ -71,7 +71,7 @@ VALUES
 'rdenton'								, 
 'password'								, 
 2										, 
-1										, 
+0										, 
 0
 ),
 (
@@ -80,7 +80,7 @@ VALUES
 'mnelson'								, 
 'password'								, 
 2										, 
-1										, 
+0										, 
 0
 );
 
@@ -193,8 +193,10 @@ VALUES
 );
 
 
--- Insert Games
 
+
+-- Insert Games
+/*
 INSERT INTO game
 (
 team1_id,
@@ -241,9 +243,26 @@ VALUES
 3,
 2,
 8
+);*/
+
+INSERT INTO game
+(
+team1_id,
+team2_id,
+game_date,
+game_in_series,
+round_number,
+round_id
+)
+VALUES
+(
+3 ,
+4 ,
+'2015-2-05' ,
+1 ,
+3,
+2
 );
-
-
 
 -- Insert User Predictions
 
@@ -258,51 +277,43 @@ VALUES
 (
 1,
 1,
-2,
-0
-),
-(
-1,
-2,
-9,
-0
-),
-(
-2,
-1,
-4,
-0
-),
-(
-1,
-3,
-4,
+NULL,
 0
 );
-/*
 
-INSERT INTO user_prediction
-(
-user_id,
-game_id,
-points_recieved_for_game
-)
-VALUES
-(
-1,
-1,
-1
-),
-(
-1,
-2,
-1
-),
-(
-2,
-2,
-1
-);
-*/
+-- -- Insert User Predictions
+
+-- INSERT INTO user_prediction
+-- (
+-- user_id,
+-- game_id,
+-- prediction, 
+-- points_recieved_for_game
+-- )
+-- VALUES
+-- (
+-- 1,
+-- 1,
+-- 2,
+-- 0
+-- ),
+-- (
+-- 1,
+-- 2,
+-- 9,
+-- 0
+-- ),
+-- (
+-- 2,
+-- 1,
+-- 4,
+-- 0
+-- ),
+-- (
+-- 1,
+-- 3,
+-- 4,
+-- 0
+-- );
 
 

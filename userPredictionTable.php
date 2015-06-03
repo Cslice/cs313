@@ -1,10 +1,12 @@
 <?php
     require("connectToDatabase.php");
-    
+     $db = loadDatabase();
     // Check for session cookie and extracts user data out of cookie
     require("verifySession.php"); 
+    require("awardPoints.php");
 
-    $db = loadDatabase();
+
+   
 
     $teams = $db->query('Select name from team;');
     $teamsArray = array();
@@ -66,10 +68,59 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script type="text/javascript">
+    function sendSelectedOptions()
+    {
+      var option_list = document.getElementsByTagName("option");
+      var prediction_list = new Array();
+      var count = 0;
+      var game_id = 0;
+      var prediction = 0;
+
+      for (i = 0; i < option_list.length; i++) 
+      {
+        if(option_list[i].selected && option_list[i].getAttribute("value") != "empty")
+        {
+          game_id = option_list[i].getAttribute("name");
+         // alert(game_id);
+          prediction = option_list[i].getAttribute("value");
+          prediction_list[game_id] = prediction;
+          //t("test");
+        }
+      }
+
+     var json = JSON.stringify(prediction_list);
+      alert(json);
+
+      $.ajax({
+       type: "POST",
+       url: "savePredictions.php",
+       //async: false,
+       data: json,
+       success: function(data){
+          alert("success");
+          return true;
+       },
+       complete: function() {},
+       error: function(xhr, textStatus, errorThrown) {
+         alert('ajax loading error...');
+         return false;
+       }
+        });
+      
+    }
+  
+
+    </script>
   </head>
 
   <body role="document">
 
+  <form method="POST" action="savePredictions.php">
 
     <div class="container theme-showcase" role="main">
 
@@ -77,7 +128,6 @@
       <br />
 
        <img src="http://www.foxnews.com/images/236484/0_61_basketball_new_nba.jpg" alt="Basketball">
-
 
       <div class="page-header">
         <h1>You Predictions</h1>
@@ -103,12 +153,12 @@
                     foreach ($games as $row)
                     {
                       $game_id = $row[id];
-                      $team_1 = $teamsArray[$row[team1_id]-1];
+                      $team_1 = $teamsArray[$row[team1_id]];
                       $team_1_id = $row[team1_id];
-                      $team_2 = $teamsArray[$row[team2_id]-1];
+                      $team_2 = $teamsArray[$row[team2_id]];
                       $team_2_id = $row[team2_id];
                       $game_date = $row[game_date];
-                      $winner = $teamsArray[$row[winner]-1];
+                      $winner = $teamsArray[$row[winner]];
 
                       if(isset($prediction_array[$game_id]))
                       {
@@ -134,9 +184,10 @@
                               if($prediction == NULL)
                               {
                                 echo  "<td><select name='$game_id'>
-                                       <option value='$team_1_id'>
+                                       <option name='$game_id' value='empty'></option>  
+                                       <option name='$game_id' value='$team_1_id'>
                                        $team_1</option>
-                                       <option value='$team_2_id'>
+                                       <option name='$game_id' value='$team_2_id'>
                                        $team_2</option></select></td>";
                               }
                               else
@@ -147,13 +198,41 @@
                                      </tr>";
                           $count++;
                     }
-                  ?>                  
+                  ?>  
+
+                  
+                  <tr>
+                <th>Total Points</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><?php 
+                      $points_list = $db->query("Select number_of_points from user
+                                                 Where id = $user_id");
+
+                      foreach($points_list as $row)
+                      {
+                       // echo "hi";
+                        echo $row[number_of_points];
+                        break;
+                      }
+                    ?>
+              </th>
+              </tr>                
             </tbody>
           </table>
+          <a href="menu.php"><button type="button" class="btn btn-lg btn-warning">Main Menu</button></a>
+          <button type="submit"  class="btn btn-lg btn-warning">Save Predictions</button>
+
         </div>
        
       </div>
     </div> <!-- /container -->
+<form >
+      
+
 
 
     <!-- Bootstrap core JavaScript

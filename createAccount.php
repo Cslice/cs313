@@ -1,5 +1,6 @@
 <?php
 	require("connectToDatabase.php");
+	require 'password.php';
 
 	// Calls insertUserData() funtion upon form submit
 	if(isset($_POST['firstName']))
@@ -80,6 +81,7 @@
 	    	$last_name = $_POST["lastName"];
 	    	$username = $_POST["username"];
 	    	$password = $_POST["password"];
+	    	$password_hash = password_hash("$password", PASSWORD_DEFAULT);
 
 	    	if($_POST["group_name_textbox"] === null || $_POST["group_name_textbox"] === ""
 	    		|| strlen($_POST["group_name_textbox"]) == 0)
@@ -103,53 +105,51 @@
 	    		$valid_group = validateAndInsertNewGroup($group_name, $group_id);
 	    		//echo $valid_group ? 'true' : 'false';
 	    	}
-	  	}
 
-	   // echo validateUsername($username) ? 'true' : 'false';
+		  	if (validateUsername($username) && $valid_group)
+		  	{
+		  		//echo "valid";
+			  	$query = 'INSERT INTO user 
+				(
+				last_name                               ,  
+				first_name                              ,
+				username                                , 
+				password                                , 
+				group_id                                ,
+				number_of_points                        ,
+				admin                        
+				)								  
+				VALUES
+				(
+				:last_name							    ,
+				:first_name								, 
+				:username								, 
+				:password								, 
+				:group_id								, 
+				:number_of_points                       ,
+				:admin										
+				)';
 
-	  	if (validateUsername($username) && $valid_group)
-	  	{
-	  		echo "valid";
-		  	$query = 'INSERT INTO user 
-			(
-			last_name                               ,  
-			first_name                              ,
-			username                                , 
-			password                                , 
-			group_id                                ,
-			number_of_points                        ,
-			admin                        
-			)								  
-			VALUES
-			(
-			:last_name							    ,
-			:first_name								, 
-			:username								, 
-			:password								, 
-			:group_id								, 
-			:number_of_points                       ,
-			:admin										
-			)';
+				$statement = $db->prepare($query);
 
-			$statement = $db->prepare($query);
+				$statement->bindValue(':last_name', $last_name);
+				$statement->bindValue(':first_name', $first_name);
+				$statement->bindValue(':username', $username);
+				$statement->bindValue(':password', $password_hash);
+				$statement->bindValue(':group_id', $group_id);
+				$statement->bindValue(':number_of_points', 0);
+				$statement->bindValue(':admin', 0);
 
-			$statement->bindValue(':last_name', $last_name);
-			$statement->bindValue(':first_name', $first_name);
-			$statement->bindValue(':username', $username);
-			$statement->bindValue(':password', $password);
-			$statement->bindValue(':group_id', $group_id);
-			$statement->bindValue(':number_of_points', 0);
-			$statement->bindValue(':admin', 0);
+				$statement->execute();
 
-			$statement->execute();
+				$user_id = $db->lastInsertId();
 
-			$user_id = $db->lastInsertId();
-
-			session_start();
-  			$_SESSION["user_id"] = $user_id;
-  			$_SESSION["admin"] = 0;
-  			$_SESSION["group_id"] = $group_id;
-  			header('Location: menu.php');
+				session_start();
+	  			$_SESSION["user_id"] = $user_id;
+	  			$_SESSION["admin"] = 0;
+	  			$_SESSION["group_id"] = $group_id;
+	  			header('Location: menu.php');
+			}
 		}
 	}
 ?>

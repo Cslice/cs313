@@ -46,5 +46,51 @@
                     }
                   ?>  */
 
-                  select id from user_group
-	    								WHERE group_name = 'Test Group';
+             INSERT INTO game
+(
+team1_id,
+team2_id,
+game_date,
+game_in_series,
+round_number,
+round_id
+)
+VALUES
+(
+3 ,
+4 ,
+'2015-2-05' ,
+1 ,
+3,
+2
+),
+(
+3 ,
+4 ,
+'2015-2-05' ,
+1 ,
+3,
+2
+);
+
+-- Insert User Predictions
+
+INSERT INTO user_prediction
+(
+user_id,
+game_id,
+prediction, 
+points_recieved_for_game
+)
+VALUES
+(
+1,
+2,
+NULL,
+0
+),(
+1,
+3,
+3,
+0
+);

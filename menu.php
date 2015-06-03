@@ -1,9 +1,10 @@
 <?php 
     require("connectToDatabase.php");
+    $db = loadDatabase();
     // Check for session cookie and extracts user data out of cookie
     require("verifySession.php");
 
-    $db = loadDatabase();
+    
 
     $first_name_list = $db->query("Select first_name from user 
                                    WHERE id = $user_id");
