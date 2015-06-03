@@ -212,7 +212,7 @@
                       $points_list = $db->query("Select number_of_points from user
                                                  Where id = $user_id");
 
-                      foreach($points_list as $row)
+                      foreach($points_list as $row) 
                       {
                        // echo "hi";
                         echo $row[number_of_points];
