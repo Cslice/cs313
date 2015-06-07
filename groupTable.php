@@ -5,13 +5,20 @@
     require("verifySession.php");
     require("awardPoints.php");
 
-
     // Get data for all members in group specified by group_id
-    $group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points
+    $group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points, g.group_name
                      FROM user_group g 
                      INNER JOIN user u 
                      ON g.id = u.group_id
-                     WHERE u.group_id = $group_id;");                     
+                     WHERE u.group_id = $group_id;");   
+              
+    $group_name_query= $db->query("SELECT g.group_name
+                     FROM user_group g
+                     INNER JOIN user u
+                     ON u.group_id = g.id
+                     WHERE u.group_id = $group_id;"); 
+
+    $grou_name_row = $group_name_query->fetch(); 
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +32,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Theme Template for Bootstrap</title>
+    <title>Group Table</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -55,10 +62,12 @@
       <br />
       <br />
 
-      <img id="teamHuddle" src="http://i.cdn.turner.com/drp/nba/cavaliers/sites/default/files/styles/main_gallery_photo__480_tall/public/150222-clenyk-1.jpg?itok=84gyU520" alt="Basketball">
+      <img id="teamHuddle" src="http://i.cdn.turner.com/drp/nba/cavaliers/sites/default/files/styles/main_gallery_photo__480_tall/public/150222-clenyk-1.jpg?itok=84gyU520" alt="Picture of all Nba teams">
 
       <div class="page-header">
-        <h1>Group Name</h1>
+        <h1><?php
+             echo $grou_name_row[group_name];
+              ?></h1>
       </div>
       <div class="row">
         <div class="col-md-10">
@@ -92,7 +101,7 @@
       <a href="menu.php"><button type="button" class="btn btn-lg btn-success">Main Menu</button></a>
       <br />
       <br />
-      
+
     </div> <!-- /container -->
 
     <!-- Bootstrap core JavaScript

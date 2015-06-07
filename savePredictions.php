@@ -9,6 +9,8 @@
 		$game_id = "";
 		$prediction = "";
 
+		// If there are not predictions to save,
+		// this will not 
 		if(count($data) != 0)
 		{
 			foreach($data as $key => $value)
