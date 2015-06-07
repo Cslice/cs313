@@ -6,7 +6,7 @@
     require("awardPoints.php");
 
 
-
+    // Get data for all members in group specified by group_id
     $group = $db->query("SELECT u.id, u.first_name, u.last_name, u.number_of_points
                      FROM user_group g 
                      INNER JOIN user u 
@@ -44,25 +44,25 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" type="text/css" href="groupTable.css">
+
   </head>
 
-  <body role="document">
+  <body role="document" id="container">
 
 
     <div class="container theme-showcase" role="main">
-
       <br />
       <br />
 
-       <img src="http://www.foxnews.com/images/236484/0_61_basketball_new_nba.jpg" alt="Basketball">
-
+      <img id="teamHuddle" src="http://i.cdn.turner.com/drp/nba/cavaliers/sites/default/files/styles/main_gallery_photo__480_tall/public/150222-clenyk-1.jpg?itok=84gyU520" alt="Basketball">
 
       <div class="page-header">
         <h1>Group Name</h1>
       </div>
       <div class="row">
         <div class="col-md-10">
-          <table class="table">
+          <table class="table" id="table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -71,28 +71,29 @@
               </tr>
             </thead>
             <tbody>
-              
-                  <?php 
-                  $count = 1; 
-                    foreach ($group as $row)
-                    {
-                    //  $nbaTeamName = $db->query('SELECT name FROM team t INNER JOIN user u ON t.id = u.favorite_team_in_playoffs_id where t.id = 9;');
-                
-                     echo "<tr>
-                              <td>$count</td>
-                              <td>$row[last_name] $row[first_name]</td>
-                              <td>$row[number_of_points]</td>                  
-                           </tr>";
-                           $count++;
-                    }
-                  ?>                  
+               <?php 
+               $count = 1; 
+                 foreach ($group as $row)
+                 {                
+                  echo "<tr>
+                           <td>$count</td>
+                           <td>$row[last_name] $row[first_name]</td>
+                           <td>$row[number_of_points]</td>                  
+                        </tr>";
+                  
+                  $count++;
+                 }
+               ?>                  
             </tbody>
           </table>
         </div>
        
       </div>
+      <a href="menu.php"><button type="button" class="btn btn-lg btn-success">Main Menu</button></a>
+      <br />
+      <br />
+      
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

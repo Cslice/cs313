@@ -3,16 +3,20 @@
 
   $db = loadDatabase();
 
-
+  // Queries to get rounds and teams in database
   $rounds = $db->query('Select * from playoff_bracket');
   $teams = $db->query('Select name from team;');
+  
   $roundsArray = array();
   $teamsArray = array();
+
+  // Fill roundsArray with all rounds in databases
   foreach($rounds as $row)
   {
     array_push($roundsArray, $row); 
   }
 
+  // Fill teamsArray with all teams in databases
   foreach($teams as $row)
   {
     array_push($teamsArray, $row[name]); 
@@ -49,6 +53,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link rel="stylesheet" type="text/css" href="playoffBracket.css">
 
 <style type="text/css">
 <!--
@@ -70,28 +75,21 @@ td p {
 }
 -->
 </style>
-
-
-
-
-
   </head>
+  <body role="document" id="container">
+    <h1 id="title">2015 NBA Playoff Bracket</h1>
 
-  <body role="document">
-
-   
     <div class="container theme-showcase" role="main">
+      <a href="menu.php"><button type="button" id="menuButton" class="btn btn-lg btn-default">Main Menu</button></a>
+      
+      
+      <br/>
+      <br/>
 
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-
-
-      <table summary="Tournament Bracket">
+      <table summary="Tournament Bracket" id="table">
        <tr>
         <td><p><?php echo $teamsArray[$roundsArray[0][team_1]-1]?></p></td>
-        <td rowspan="2"><p><?php echo $teamsArray[$roundsArray[2][team_1]-1]?></p></td>
+        <td  rowspan= "2"><p><?php echo $teamsArray[$roundsArray[2][team_1]-1]?></p></td>
         <td rowspan="4"><p><?php echo $teamsArray[$roundsArray[4][team_1]-1]?></p></td>
         <td rowspan="8"><p><?php echo $teamsArray[$roundsArray[6][team_1]-1]?></p></td>
         <td rowspan="8"><p><?php echo $teamsArray[$roundsArray[6][team_2]-1]?></p></td>
@@ -137,21 +135,12 @@ td p {
        </tr>
       </table>
 
-
-
       <br/>
       <br/>
       <br/>
       <br/>
-
-
-     
-
-      </table>
-
-
-
     </div> <!-- /container -->
+
 
 
     <!-- Bootstrap core JavaScript

@@ -1,0 +1,30 @@
+#border {
+    border-radius: 50px;
+    border: 2px solid #8AC007;
+    padding: 2px;
+    width: 20px;
+    height: 2px;
+}
+#container
+ {
+ 	background-image:url(goldenStateCourt.jpg);
+    background-size:cover; 
+}
+#table
+{
+    font-family: Raleway;
+	font-weight:900;
+	font-size: 17px;
+	background: rgba(255,255,255,0.4);
+	border-radius: 25px;
+}
+#title
+{
+	text-align: center;
+}
+#menuButton
+{
+	
+	margin: 0 auto; width: 180px;
+}
+

@@ -1,6 +1,8 @@
 <?php
     require("connectToDatabase.php");
     $db = loadDatabase();
+
+    // Load list of all groups in databases
     $groups = $db->query('select * from user_group');
 ?>
 
@@ -37,9 +39,11 @@
 
   <body>
 
-    <div class="container">
-        <h2 class="form-signin-heading">Please fill in the following information</h2>
+    <h2 id="top-heading" class="form-signin-heading">Please Enter in the following information</h2>
 
+    <div class="container">
+
+      <!-- From with all elements to create new user --> 
       <form class="form-signin" name="form" method='POST' action="createAccount.php">
         <input type="text" name="firstName" class="form-control" placeholder="First Name" required autofocus>
         <br />
@@ -52,13 +56,12 @@
         
         <input type="password" name="password" class="form-control" placeholder="Password" required>
 
-        
-        <br/> 
-        <br/> 
+        <br/>
 
         <h5>Select a Group</h5> 
         <select name="group_name_dropdown">
           <?php
+            // Print an option in drop-down for each group in databases
             foreach($groups as $row) 
             {
               echo "<option value=\"$row[group_name]\">$row[group_name]</option>";
@@ -67,25 +70,21 @@
         </select>
 
         <br/> 
+        <br/> 
         <h5>Or</h5>
         <br/> 
-
         <h5>Create a New Group</h5>
-        <br/>
-
+        
         <input type="text" name="group_name_textbox" class="form-control" placeholder="Group Name" autofocus>
 
         <br/> 
         <br/> 
-
-
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <br />
         <br />
       </form>
 
     </div> <!-- /container -->
-
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

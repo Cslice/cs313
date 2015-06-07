@@ -1,20 +1,20 @@
 
 
--- Insert Groups
-INSERT INTO user_group 
-(
-group_name                              , 
-number_of_users
-) 
-VALUES 
-(
-'Test Group'                            , 
-1
-),
-(
-'Test Group2'                            , 
-4
-);
+-- -- Insert Groups
+-- INSERT INTO user_group 
+-- (
+-- group_name                              , 
+-- number_of_users
+-- ) 
+-- VALUES 
+-- (
+-- 'Test Group'                            , 
+-- 0
+-- ),
+-- (
+-- 'Test Group2'                            , 
+-- 0
+-- );
 
 
 -- Insert NBA Teams
@@ -45,44 +45,44 @@ VALUES
 );
 
 -- Insert Users 
-INSERT INTO user 
-(
-first_name                               ,  
-last_name                              ,
-username                                , 
-password                                , 
-group_id                                ,
-number_of_points                        , 
-admin
-)								  
-VALUES
-(
-'Cameron'								,
-'Thomas'								, 
-'a'								, 
-'a'								, 
-2										, 
-0										, 
-1
-),
-(
-'Rusty'								    ,
-'Denton'						   		, 
-'rdenton'								, 
-'password'								, 
-2										, 
-0										, 
-0
-),
-(
-'Matt'								    ,
-'Nelson'						   		, 
-'mnelson'								, 
-'password'								, 
-2										, 
-0										, 
-0
-);
+-- INSERT INTO user 
+-- (
+-- first_name                               ,  
+-- last_name                              ,
+-- username                                , 
+-- password                                , 
+-- group_id                                ,
+-- number_of_points                        , 
+-- admin
+-- )								  
+-- VALUES
+-- (
+-- 'Cameron'								,
+-- 'Thomas'								, 
+-- 'a'								, 
+-- 'a'								, 
+-- 2										, 
+-- 0										, 
+-- 1
+-- ),
+-- (
+-- 'Rusty'								    ,
+-- 'Denton'						   		, 
+-- 'rdenton'								, 
+-- 'password'								, 
+-- 2										, 
+-- 0										, 
+-- 0
+-- ),
+-- (
+-- 'Matt'								    ,
+-- 'Nelson'						   		, 
+-- 'mnelson'								, 
+-- 'password'								, 
+-- 2										, 
+-- 0										, 
+-- 0
+-- );
 
 -- Insert Rounds
 
@@ -262,24 +262,32 @@ VALUES
 1 ,
 3,
 2
+),
+(
+3 ,
+4 ,
+'2015-2-05' ,
+1 ,
+3,
+2
 );
 
 -- Insert User Predictions
 
-INSERT INTO user_prediction
-(
-user_id,
-game_id,
-prediction, 
-points_recieved_for_game
-)
-VALUES
-(
-1,
-1,
-NULL,
-0
-);
+-- INSERT INTO user_prediction
+-- (
+-- user_id,
+-- game_id,
+-- prediction, 
+-- points_recieved_for_game
+-- )
+-- VALUES
+-- (
+-- 1,
+-- 1,
+-- NULL,
+-- 0
+-- );
 
 -- -- Insert User Predictions
 

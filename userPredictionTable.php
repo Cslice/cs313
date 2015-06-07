@@ -14,7 +14,6 @@
     foreach($teams as $row)
     {
       array_push($teamsArray, $row[name]); 
-
     }
 
     $games = $db->query("Select g.id, g.team1_id, g.team2_id, g.game_date, g.winner, 
@@ -34,7 +33,6 @@
     {
       $prediction_array[$row[game_id]] = $row[prediction];
       $points_for_game_array[$row[game_id]] = $row[points_recieved_for_game];
-
     }             
 ?>
 
@@ -71,70 +69,42 @@
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="userPredictions.css">
+
 
     <script type="text/javascript">
-    function sendSelectedOptions()
+    function validate()
     {
+      savePredictions = true;
       var option_list = document.getElementsByTagName("option");
-      var prediction_list = new Array();
-      var count = 0;
-      var game_id = 0;
-      var prediction = 0;
 
-      for (i = 0; i < option_list.length; i++) 
+      if(option_list.length == 0)
       {
-        if(option_list[i].selected && option_list[i].getAttribute("value") != "empty")
-        {
-          game_id = option_list[i].getAttribute("name");
-         // alert(game_id);
-          prediction = option_list[i].getAttribute("value");
-          prediction_list[game_id] = prediction;
-          //t("test");
-        }
-      }
-
-     var json = JSON.stringify(prediction_list);
-      alert(json);
-
-      $.ajax({
-       type: "POST",
-       url: "savePredictions.php",
-       //async: false,
-       data: json,
-       success: function(data){
-          alert("success");
-          return true;
-       },
-       complete: function() {},
-       error: function(xhr, textStatus, errorThrown) {
-         alert('ajax loading error...');
-         return false;
-       }
-        });
-      
+        savePredictions = false;
+        alert("No Predictions To Save");
+      }      
     }
   
 
     </script>
   </head>
 
-  <body role="document">
+  <body role="document" id="container">
 
-  <form method="POST" action="savePredictions.php">
+  <form method="POST" onsubmit="return validate()" action="savePredictions.php">
 
     <div class="container theme-showcase" role="main">
 
       <br />
       <br />
 
-       <img src="http://www.foxnews.com/images/236484/0_61_basketball_new_nba.jpg" alt="Basketball">
 
       <div class="page-header">
         <h1>You Predictions</h1>
       </div>
       <div class="row">
         <div class="col-md-10">
-          <table class="table">
+          <table class="table" id="table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -168,12 +138,9 @@
                       {
                         $prediction = NULL;
                       }
-                      
-                      
+                       
                       $points_recieved_for_game = $points_for_game_array[$game_id]; 
                     
-      
-
                       echo "<tr>
                               <td>$count</td>
                               <td>$team_1</td>
@@ -181,7 +148,7 @@
                               <td>$game_date</td>           
                               <td>$winner</td>";
 
-                              if($prediction == NULL)
+                              if($prediction == NULL && $winner == NULL)
                               {
                                 echo  "<td><select name='$game_id'>
                                        <option name='$game_id' value='empty'></option>  
@@ -199,7 +166,6 @@
                           $count++;
                     }
                   ?>  
-
                   
                   <tr>
                 <th>Total Points</th>
@@ -211,26 +177,22 @@
                 <th><?php 
                       $points_list = $db->query("Select number_of_points from user
                                                  Where id = $user_id");
-
-                      foreach($points_list as $row) 
-                      {
-                       // echo "hi";
-                        echo $row[number_of_points];
-                        break;
-                      }
+                      
+                      $row = $points_list->fetch();
+                      echo $row[number_of_points];
                     ?>
               </th>
               </tr>                
             </tbody>
           </table>
-          <a href="menu.php"><button type="button" class="btn btn-lg btn-warning">Main Menu</button></a>
-          <button type="submit"  class="btn btn-lg btn-warning">Save Predictions</button>
+          <a href="menu.php"><button type="button" class="btn btn-lg btn-info">Main Menu</button></a>
+          <button type="submit" onsubmit="return validate()"  class="btn btn-lg btn-info">Save Predictions</button>
 
         </div>
        
       </div>
     </div> <!-- /container -->
-<form >
+<form onsubmit="return validate()">
       
 
 

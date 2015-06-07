@@ -1,51 +1,26 @@
 <?php
     $game_list = $db->query("SELECT id, winner from game"); 
-    $prediction_list = $db->query("SELECT id, game_id, prediction, points_given_flag 
-    								from user_prediction"); 
+    $prediction_list = $db->query("SELECT id, game_id, prediction, 
+                                   points_given_flag 
+    							   FROM user_prediction"); 
 
-   
- 
-   // echo "count game: " . $game_list->rowCount() . "<br />";
-   //  echo "count: " . $prediction_list->rowCount() . "<br />";
-
+    // Loop though all games to check for to games that have 
+    // been update with winners
     foreach($game_list as $game_row)
     {
-    	$prediction_list = $db->query("SELECT id, user_id, game_id, prediction, points_given_flag
-    								from user_prediction"); 
-    	//echo "first loop <br />";
+    	$prediction_list = $db->query("SELECT id, user_id, game_id,
+                                       prediction, points_given_flag
+    								   FROM user_prediction"); 
+
+        // Loop through all predictions to award points
     	foreach($prediction_list as $prediction_row)
     	{
-    		
-
-    		// echo ($game_row[winner] != NULL) ? 'true' : 'false';
-    		// echo "<br />";
-
-    		// echo ($game_row[id] == $prediction_row[game_id]) ? 'true' : 'false';
-    		// echo "<br />";
-
-    		// echo ($game_row[winner] == $prediction_row[prediction]) ? 'true' : 'false';
-    		// echo "<br />";
-
-    		// echo ($prediction_row[points_given_flag] == NULL) ? 'true' : 'false';
-    		// echo "<br />";
-    		// echo "<br />";
-    		// echo $prediction_row[number_of_points];
-    		// echo "<br />";
-
-
-    		//echo "second loop <br />";
     		if($game_row[winner] != NULL &&
     		   $game_row[id] == $prediction_row[game_id] && 
     		   $game_row[winner] == $prediction_row[prediction] &&
     		   $prediction_row[points_given_flag] == NULL)
     		{
-    			
-    			
-    		// 	echo "number of points: " . $number_of_points;
-    		// echo "<br />";
-
-    		// 	echo "valid";
-    			// Set points for correct game prediction to 1
+                // Add prediction for user
     			$query = "UPDATE user_prediction
 			    SET points_recieved_for_game=:points_recieved_for_game
 				WHERE id='$prediction_row[id]'";
@@ -69,6 +44,5 @@
 				$statement->execute();
     		}
     	}
-    	//echo "end";
     }
 ?>

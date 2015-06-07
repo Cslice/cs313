@@ -3,52 +3,45 @@
 	require("verifySession.php");
     $db = loadDatabase();
 
-	$data = $_POST;
-	//var_dump($data);
-	$game_id = "";
-	$prediction = "";
-
-
-	foreach($data as $key => $value)
+	if ($_SERVER["REQUEST_METHOD"] == "POST") 
 	{
-		if($value != "empty")
+		$data = $_POST;
+		$game_id = "";
+		$prediction = "";
+
+		if(count($data) != 0)
 		{
-			//echo $key . " " . $value . "<br/>";
+			foreach($data as $key => $value)
+			{
+				if($value != "empty")
+				{
+					$game_id = $key;
+					$prediction = $value;
 
-			$game_id = $key;
-			$prediction = $value;
+					$query = 'INSERT INTO user_prediction 
+							 (
+							 user_id                               ,  
+							 game_id                              ,
+							 prediction                                                      
+							 )								  
+							 VALUES
+							 (
+							 :user_id                               ,  
+							 :game_id                              ,
+							 :prediction        																	
+								)';
 
-		// $query = 'UPDATE user_prediction
-		// 	  SET prediction = :prediction
-		// 	  WHERE user_id = :user_id 
-		// 	  AND game_id = :game_id;';
+					// 
+					$statement = $db->prepare($query);
+					$statement->bindValue(':prediction', $prediction);
+					$statement->bindValue(':user_id', $user_id);
+					$statement->bindValue(':game_id', $game_id);
+					$statement->execute();
 
-			  $query = 'INSERT INTO user_prediction 
-				(
-				user_id                               ,  
-				game_id                              ,
-				prediction                                                      
-				)								  
-				VALUES
-				(
-				:user_id                               ,  
-				:game_id                              ,
-				:prediction        																	
-				)';
-
-				$statement = $db->prepare($query);
-
-				$statement->bindValue(':prediction', $prediction);
-				$statement->bindValue(':user_id', $user_id);
-				$statement->bindValue(':game_id', $game_id);
-
-				$statement->execute();
-	  			header('Location: userPredictionTable.php');
-
-
-				//$user_id = $db->lastInsertId();
+					// Re-direct user to predictions page
+			  		header('Location: userPredictionTable.php');
+				}
+			}
 		}
-
-
 	}
 ?>

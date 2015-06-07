@@ -38,6 +38,7 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+     <link rel="stylesheet" type="text/css" href="menu.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -46,32 +47,22 @@
     <![endif]-->
   </head>
 
-  <body role="document">
-
+  <body id="center" role="document">
     <div class="container theme-showcase" role="main">
-
-      
-
       <div class="page-header">
-        <h1><?php echo $first_name?></h1>
+        <h1>Welcome <?php echo $first_name?></h1>
         <br />
-        <h1>NBA Playoffs</h1>
       </div>
     
+      <img id="playoffPicture" src="http://www.nbaplayoffsbracket.com/img/nbaplayoffs.svg" alt="NBA Playoffs">
 
-
-      <img class="baltimorePicture" src="http://www.nbaplayoffsbracket.com/img/nbaplayoffs.svg" alt="NBA Playoffs">
-
-    <div class="page-header">
-      <a href="userPredictionTable.php"><button type="button" class="btn btn-lg btn-info">View Your Predictions</button></a>
-      <a href="playoffBracket.php"><button type="button" class="btn btn-lg btn-warning">View Playoff Bracket</button></a>
-      <a href="groupTable.php"><button type="button" class="btn btn-lg btn-danger">View People In Your Group</button></a>
-      <a href="endSession.php"><button type="button" class="btn btn-lg btn-danger">Sign Out</button></a>
-    </div>
-
-   
+      <div class="page-header">
+        <a href="userPredictionTable.php"><button type="button" class="btn btn-lg btn-info">View Your Predictions</button></a>
+        <a href="playoffBracket.php"><button type="button" class="btn btn-lg btn-warning">View Playoff Bracket</button></a>
+        <a href="groupTable.php"><button type="button" class="btn btn-lg btn-success">View People In Your Group</button></a>
+        <a href="endSession.php"><button type="button" class="btn btn-lg btn-danger">Sign Out</button></a>
+      </div>
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
