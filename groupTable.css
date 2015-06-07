@@ -29,7 +29,8 @@
 }
 #teamHuddle
 {
-	width:540px; /* you can use % */
+	margin-left: 285px;
+	width:500px; /* you can use % */
     height: auto;
 	border-radius: 50px;
 	vertical-align: middle;
