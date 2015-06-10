@@ -123,9 +123,9 @@
                     foreach ($games as $row)
                     {
                       $game_id = $row[id];
-                      $team_1 = $teamsArray[$row[team1_id]];
+                      $team_1 = $teamsArray[$row[team1_id]-1];
                       $team_1_id = $row[team1_id];
-                      $team_2 = $teamsArray[$row[team2_id]];
+                      $team_2 = $teamsArray[$row[team2_id]-1];
                       $team_2_id = $row[team2_id];
                       $game_date = $row[game_date];
                       $winner = $teamsArray[$row[winner]];
