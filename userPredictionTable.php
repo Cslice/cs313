@@ -128,7 +128,7 @@
                       $team_2 = $teamsArray[$row[team2_id]-1];
                       $team_2_id = $row[team2_id];
                       $game_date = $row[game_date];
-                      $winner = $teamsArray[$row[winner]];
+                      $winner = $teamsArray[$row[winner]-1];
 
                       if(isset($prediction_array[$game_id]))
                       {
