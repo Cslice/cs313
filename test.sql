@@ -75,22 +75,22 @@ VALUES
 
 -- Insert User Predictions
 
-INSERT INTO user_prediction
-(
-user_id,
-game_id,
-prediction, 
-points_recieved_for_game
-)
-VALUES
-(
-1,
-2,
-NULL,
-0
-),(
-1,
-3,
-3,
-0
-);
+-- INSERT INTO user_prediction
+-- (
+-- user_id,
+-- game_id,
+-- prediction, 
+-- points_recieved_for_game
+-- )
+-- VALUES
+-- (
+-- 1,
+-- 2,
+-- NULL,
+-- 0
+-- ),(
+-- 1,
+-- 3,
+-- 3,
+-- 0
+-- );

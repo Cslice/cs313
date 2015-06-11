@@ -132,7 +132,7 @@
 
                       if(isset($prediction_array[$game_id]))
                       {
-                        $prediction = $teamsArray[$prediction_array[$game_id]];
+                        $prediction = $teamsArray[$prediction_array[$game_id]-1];
                       }
                       else
                       {
